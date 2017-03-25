@@ -1,6 +1,28 @@
 function Get-FBXDownload {
+    param(
+        $BaseURL = $global:FBXBaseURL,
+        [switch]$FullInfo
+    )
     #List des downloads
-    (Invoke-RestMethod -Uri "$global:FBXBaseURL/downloads/" -Headers $global:Header).result
+    $DownloadResult = (Invoke-RestMethod -Uri "$BaseURL/downloads/" -Headers $global:Header).result
+    ForEach ($download in $DownloadResult) {
+        
+        $Params = [ordered]@{
+            Name = $download.name
+            Size = $download.size | ConvertTo-KMG
+            Status = $download.status
+            CreatedTime = Get-UnixDate $download.created_ts
+            ID = $download.id
+            Type = switch ($download.type) {
+                "bt"	{"bittorrent"}
+                "nzb"	{"newsgroup"}
+                "http"	{"HTTP"}
+                "ftp"	{"FTP"}
+                default {"Unknown"}
+            }
+        }
+        New-Object PSObject -Property $params
+    }
 }
 
 <#
