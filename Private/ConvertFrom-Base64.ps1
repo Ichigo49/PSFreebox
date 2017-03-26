@@ -27,7 +27,7 @@ function ConvertFrom-Base64 {
     Shows how to specify a custom encoding in case your string isn't in Unicode text encoding. 
      
     .EXAMPLE 
-    'RW5jb2RlIG1lIQ==' | ConvertTo-Base64 
+    'RW5jb2RlIG1lIQ==' | ConvertFrom-Base64 
      
     Shows how you can pipeline input into `ConvertFrom-Base64`. 
     #>
