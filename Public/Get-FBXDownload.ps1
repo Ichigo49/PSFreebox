@@ -1,7 +1,8 @@
 function Get-FBXDownload {
     <#
-    TODO : Setup help
-    TODO : FullInfo switch : OK
+        TODO : Setup help
+        TODO : FullInfo switch : OK
+        TODO : error management
     #>
     param(
         $BaseURL = $global:FBXBaseURL,
@@ -11,6 +12,7 @@ function Get-FBXDownload {
     #List des downloads
     $DownloadResult = (Invoke-RestMethod -Uri "$BaseURL/downloads/" -Headers $global:Header).result
     ForEach ($download in $DownloadResult) {
+        $Ratio = [math]::Round($download.tx_bytes/$download.rx_bytes,2)
         if ($SizeHumanReadable) {
             $DownloadSize = $download.size | ConvertTo-KMG
             $DownloadReceived = $download.rx_bytes | ConvertTo-KMG
@@ -43,7 +45,7 @@ function Get-FBXDownload {
             $Params.Add("Position",$download.queue_pos)
             $Params.Add("Received",$DownloadReceived)
             $Params.Add("Seeded",$DownloadSeeded)
-            $Params.Add("Ratio", [math]::Round($DownloadSeeded/$DownloadReceived,2))
+            $Params.Add("Ratio",$Ratio)
         }
         New-Object PSObject -Property $params
     }

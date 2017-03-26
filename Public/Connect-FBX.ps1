@@ -1,4 +1,8 @@
 function Connect-FBX {
+    <#
+        TODO : Setup help
+        TODO : FullInfo switch : OK
+    #>
     param(
         $BaseURL = $global:FBXBaseURL,
         $AppToken = $global:ApiToken
@@ -22,8 +26,9 @@ $SessionJson = @"
     $global:session = Invoke-RestMethod -Uri "$BaseURL/login/session/" -Method Post -Body $SessionJson
     $global:Header = @{'X-Fbx-App-Auth' = $($global:session.result.session_token)}
 
-    'ouverture de la session avec succes: {0}' -f $global:session.success
-    'le session_token est: {0}' -f $global:session.result.session_token
-    # Afficher les permissions
-    $global:session.result.permissions
+    if ($global:session.success) {
+        Write-Warning "[PSFreebox] Successfully connected"
+    } else {
+        Write-Warning "[PSFreebox]Problem encountered while connecting"
+    }
 }

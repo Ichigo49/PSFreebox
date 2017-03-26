@@ -1,4 +1,7 @@
 function Initialize-FBXConnection {
+    <#
+        TODO : Setup help
+    #>
 # Déclarer l'application            
 $AuthJson = @'
 {

@@ -1,4 +1,8 @@
 function Get-FBXDownloadFiles {
+    <#
+        TODO : Setup help
+        TODO : FullInfo switch : OK
+    #>
     param (
         [string]$DownloadID,
         [switch]$SizeHumanReadable

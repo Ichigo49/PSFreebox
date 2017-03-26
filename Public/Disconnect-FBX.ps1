@@ -1,4 +1,7 @@
 function Disconnect-FBX {
+    <#
+        TODO : Setup help
+    #>
     param(
         $BaseURL = $global:FBXBaseURL
     )

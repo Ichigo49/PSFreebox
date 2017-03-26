@@ -1,4 +1,8 @@
 function Get-FBXCallLogEntry {
+    <#
+        TODO : Setup help
+        TODO : FullInfo switch : OK
+    #>
     param (
         [Parameter(Mandatory=$true,ValueFromPipeline=$true,Position=0)]
         [ValidateNotNullOrEmpty()]
