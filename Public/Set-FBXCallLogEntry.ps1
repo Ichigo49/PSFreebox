@@ -3,14 +3,20 @@ function Set-FBXCallLogEntry {
         [Parameter(Mandatory=$true,ValueFromPipeline=$true,Position=0)]
         [ValidateNotNullOrEmpty()]
         $EntryID,
-        [Parameter(Mandatory=$true,ValueFromPipeline=$true,Position=0)]
-        [ValidateNotNullOrEmpty()]
-        $New
+        [Parameter(Mandatory=$true,Position=1)]
+        [bool]$Acknowledge
     )
+
+if ($Acknowledge -eq $True) {
+    $StringNew = 'true'
+} else {
+    $StringNew = 'false'
+}
+
 
 $SetCallJson = @"
 {
-    `"new`": $New
+    `"new`": $StringNew
 }
 "@
 

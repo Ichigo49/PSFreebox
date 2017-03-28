@@ -10,7 +10,7 @@ function Get-FBXDownloadTask {
         [switch]$SizeHumanReadable,
         [switch]$FullInfo
     )
-    #List des downloads
+
     $DownloadTaskResult = (Invoke-RestMethod -Uri "$global:FBXBaseURL/downloads/$EntryID" -Headers $global:Header).result
     $Ratio = [math]::Round($DownloadTaskResult.tx_bytes/$DownloadTaskResult.rx_bytes,2)
     if ($SizeHumanReadable) {
