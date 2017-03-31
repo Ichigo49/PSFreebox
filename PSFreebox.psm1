@@ -1,5 +1,5 @@
 $global:FBXApi = Invoke-RestMethod -Uri http://mafreebox.freebox.fr/api_version
-$global:FBXBaseURL = "http://mafreebox.freebox.fr$($global:FBXApi.api_base_url)v$([int]$global:FBXApi.api_version)"
+$global:FBXBaseURL = "https://mafreebox.freebox.fr$($global:FBXApi.api_base_url)v$([int]$global:FBXApi.api_version)"
 $global:ApiTokenFile =  "$Home\.fbx\fbx.key"
 if ((Test-Path $global:ApiTokenFile -ErrorAction SilentlyContinue) -eq $True) {
     $global:ApiToken = Get-Content $global:ApiTokenFile
